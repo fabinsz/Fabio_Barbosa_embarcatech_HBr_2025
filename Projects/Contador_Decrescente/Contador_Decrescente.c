@@ -107,7 +107,7 @@ int main() {
             ssd1306_draw_string(ssd, 0, 40, "Cliques");
             draw_int_on_oled(ssd, 80, 40, b);
             render_on_display(ssd, &frame_area);
-            sleep_ms(100);
+            sleep_ms(1000);
         }
     }
 

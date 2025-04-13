@@ -2,43 +2,43 @@
 
 ## Task Logic Explanation
 
-Este projeto em C utiliza o Raspberry Pi Pico para ler a **temperatura interna do chip** através do sensor embutido conectado ao canal ADC4. Os dados são exibidos em tempo real em um display OLED SSD1306 via comunicação I2C.
+This C project uses the Raspberry Pi Pico to read the **internal temperature** from the onboard sensor connected to ADC channel 4. The data is displayed in real time on an SSD1306 OLED display via I2C communication.
 
 ### System Behavior
 
-- O sistema lê a temperatura interna do RP2040 utilizando o sensor conectado ao **canal ADC4**.
-- Para aumentar a precisão da leitura, são coletadas **100 amostras** e calculada a média.
-- A cada segundo, o valor em graus Celsius (ºC) é exibido no display OLED.
-- A temperatura também é impressa no terminal serial através da porta USB.
+- The system reads the RP2040's internal temperature using the sensor connected to **ADC channel 4**.
+- To improve precision, **100 samples** are collected and averaged.
+- Every second, the temperature value in degrees Celsius (°C) is displayed on the OLED screen.
+- The temperature is also printed to the serial terminal via the USB port.
 
 ---
 
 ## Requirements
 
 - Raspberry Pi Pico  
-- Display OLED SSD1306 (I2C)  
+- SSD1306 OLED Display (I2C)  
 - Raspberry Pi Pico SDK  
-- Biblioteca SSD1306 compatível com o SDK (com suporte a `ssd1306_draw_string()` e `render_on_display()`)  
+- SSD1306-compatible library for the SDK (with support for `ssd1306_draw_string()` and `render_on_display()`)  
 
 ---
 
 ## Pin Connections
 
-| Componente       | Pino Pico | Função        |
-|------------------|-----------|---------------|
-| OLED - SDA       | GPIO14    | I2C SDA       |
-| OLED - SCL       | GPIO15    | I2C SCL       |
+| Component         | Pico Pin | Function       |
+|------------------|----------|----------------|
+| OLED - SDA       | GPIO14   | I2C SDA        |
+| OLED - SCL       | GPIO15   | I2C SCL        |
 
 ---
 
 ## Notes
 
-- O sensor de temperatura do RP2040 é lido através do canal **ADC4**, conforme especificado no datasheet.
-- A conversão da leitura bruta do ADC para temperatura em ºC utiliza a fórmula oficial:  
+- The RP2040 temperature sensor is read via **ADC channel 4**, as specified in the datasheet.
+- The raw ADC reading is converted to degrees Celsius using the official formula:  
   \[
   T = 27 - \frac{(V_{\text{sensor}} - 0.706)}{0.001721}
   \]
-- A leitura do ADC é feita com resolução de 12 bits (0 a 4095) e referência de tensão de 3.3V.
-- A função `draw_float_on_oled()` converte valores `float` em strings com precisão ajustável para exibição no display.
-- O display é inicializado na interface **I2C1**, com resistores de pull-up ativados nos pinos GPIO14 e GPIO15.
+- The ADC operates at 12-bit resolution (0 to 4095) with a reference voltage of 3.3V.
+- The function `draw_float_on_oled()` converts float values to strings with configurable precision for display.
+- The display is initialized on **I2C1**, with pull-up resistors enabled on GPIO14 and GPIO15.
 

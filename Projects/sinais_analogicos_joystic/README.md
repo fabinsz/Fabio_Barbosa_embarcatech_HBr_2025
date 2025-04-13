@@ -2,44 +2,40 @@
 
 ## Task Logic Explanation
 
-Este projeto em C utiliza o Raspberry Pi Pico para ler os valores analógicos de um joystick (eixo X e Y) utilizando os canais ADC e exibir os valores em tempo real em um display OLED via I2C.
+This C project uses the Raspberry Pi Pico to read analog values from a joystick (X and Y axes) using the ADC channels and display the values in real time on an OLED display via I2C.
 
 ### System Behavior
 
-- O sistema lê continuamente os sinais dos pinos analógicos **GPIO26 (ADC0 - eixo Y)** e **GPIO27 (ADC1 - eixo X)**.
-- A cada ~50ms, os valores brutos dos dois canais ADC (de 0 a 4095) são atualizados e exibidos no display OLED SSD1306.
-- O display mostra os rótulos "X:" e "Y", seguidos pelos respectivos valores lidos dos eixos.
-- O valor de cada eixo é mostrado em sua linha correspondente no display.
+- The system continuously reads signals from the analog pins **GPIO26 (ADC0 - Y axis)** and **GPIO27 (ADC1 - X axis)**.
+- Every ~50ms, the raw values from both ADC channels (0 to 4095) are updated and displayed on the SSD1306 OLED display.
+- The display shows the labels "X:" and "Y", followed by the respective values read from the axes.
+- The value of each axis is displayed in its corresponding line on the screen.
 
 ---
 
 ## Requirements
 
 - Raspberry Pi Pico  
-- Display OLED SSD1306 (I2C)  
-- Joystick analógico com saídas nos eixos X e Y (conectado aos GPIOs 26 e 27)  
+- SSD1306 OLED Display (I2C)  
+- Analog joystick with X and Y axis outputs (connected to GPIOs 26 and 27)  
 - Raspberry Pi Pico SDK  
-- Biblioteca SSD1306 compatível com o SDK  
+- SSD1306-compatible library for the SDK  
 
 ---
 
 ## Pin Connections
 
-| Componente         | Pino Pico | Função        |
-|--------------------|-----------|---------------|
-| OLED - SDA         | GPIO14    | I2C SDA       |
-| OLED - SCL         | GPIO15    | I2C SCL       |
-| Joystick - Eixo Y  | GPIO26    | ADC0          |
-| Joystick - Eixo X  | GPIO27    | ADC1          |
+| Component         | Pico Pin | Function       |
+|-------------------|----------|----------------|
+| OLED - SDA        | GPIO14   | I2C SDA        |
+| OLED - SCL        | GPIO15   | I2C SCL        |
+| Joystick - Y axis | GPIO26   | ADC0           |
+| Joystick - X axis | GPIO27   | ADC1           |
 
 ---
 
 ## Notes
 
-- O display é inicializado usando a interface **I2C1** com frequência de 400kHz.
-- Os pinos I2C (GPIO14 e GPIO15) são configurados com resistores de pull-up.
-- A função `draw_int_on_oled()` converte os valores inteiros dos ADCs para strings e os escreve no display.
-
----
-
-
+- The display is initialized using the **I2C1** interface with a frequency of 400kHz.
+- The I2C pins (GPIO14 and GPIO15) are configured with pull-up resistors.
+- The function `draw_int_on_oled()` converts integer ADC values to strings and writes them to the display.
